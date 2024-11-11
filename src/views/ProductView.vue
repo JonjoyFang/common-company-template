@@ -10,27 +10,67 @@
           :class="listNum == index ? 'list-box list-box-active' : 'list-box'"
           @click="changeList(index)"
         >
-          {{ item }}
+          {{ item.name }}
         </div>
       </div>
       <div class="about-content-right">
         <div class="title">
-          服务介绍
+          {{ listNum == null ? "服务介绍" : list[listNum].name }}
           <div class="maodian">
-            <RouterLink to="/">首页</RouterLink> > 服务介绍
+            <RouterLink to="/">首页</RouterLink> >
+            {{ listNum == null ? "服务介绍" : list[listNum].name }}
           </div>
         </div>
-        <div class="right-content"></div>
+        <div class="right-content">
+          <div
+            class="right-content-list right-content-list-all"
+            v-if="listNum == null"
+          >
+            <div
+              class="content-list-box"
+              v-for="(item, index) in list"
+              :key="index"
+            >
+              <div class="img">
+                <img :src="item.img" />
+              </div>
+              <div class="btn">了解详情</div>
+            </div>
+          </div>
+          <div class="right-content-list" v-else>
+            <div class="content-list-box">
+              <div class="img">
+                <img :src="list[listNum].img" />
+              </div>
+              <div class="btn">了解详情</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
 import { ref } from "vue";
-let listNum = ref();
-const list = ["杯型标准筒", "杯型短筒", "中空翻边标准筒", "中空翻边短筒"];
-
+import xieboImg from "@/assets/img/xiebo.jpg";
+import scaImg from "@/assets/img/sca.jpg";
+import sifuImg from "@/assets/img/sifu.jpg";
+let listNum = ref(null);
+const list = [
+  {
+    name: "谐波速机",
+    img: xieboImg,
+  },
+  {
+    name: "SCARA",
+    img: scaImg,
+  },
+  {
+    name: "伺服执行器",
+    img: sifuImg,
+  },
+];
 const changeList = (index) => {
   listNum.value = index;
 };
@@ -101,10 +141,55 @@ const changeList = (index) => {
           font-size: 12px;
         }
       }
-      .right-content-box {
+      .right-content {
         min-height: 200px;
         padding: 20px;
         line-height: 1.75em;
+        .right-content-list {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          // flex-wrap: wrap;
+          .content-list-box {
+            display: block;
+            width: 258.33333px;
+            height: auto;
+            background: #ffffff;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            cursor: pointer;
+            .img {
+              display: block;
+              width: 100%;
+              height: 180px;
+              text-align: center;
+              line-height: 180px;
+              border-bottom: 1px solid #c9c9c9;
+              transition: all 0.6s;
+              box-sizing: border-box;
+
+              img {
+                width: 167px;
+                height: 179px;
+              }
+            }
+            .btn {
+              width: 120px;
+              height: 35px;
+              line-height: 35px;
+              margin: 30px auto 0 auto;
+              text-align: center;
+              border: 1px solid #cccccc;
+              transition: all 0.6s;
+            }
+          }
+        }
+        .right-content-list-all {
+          .content-list-box {
+            // width: 100%;
+          }
+        }
       }
     }
   }

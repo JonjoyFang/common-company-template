@@ -12,7 +12,11 @@
           <p>地址：深圳市宝安区沙井街道坣岗社区中日龙路10号厂房1层</p>
         </div>
         <div class="content-center">
-          <div v-for="(item, index) in list" :key="index" class="content-center-item">
+          <div
+            v-for="(item, index) in list"
+            :key="index"
+            class="content-center-item"
+          >
             <h3>{{ item.name }}</h3>
             <p v-for="(cItem, cIndex) in item.child" :key="cIndex">
               {{ cItem }}
@@ -32,30 +36,30 @@
 <script setup>
 const list = [
   {
-    name: '关于我们',
-    child: ['公司介绍', '企业文化'],
+    name: "关于我们",
+    child: ["公司介绍", "企业文化"],
   },
   {
-    name: '产品中心',
-    child: ['产品分类'],
+    name: "产品中心",
+    child: ["谐波速机", "SCARA", "伺服执行器"],
   },
   {
-    name: '应用领域',
-    child: ['行业应用'],
+    name: "应用领域",
+    child: ["行业应用"],
   },
   {
-    name: '新闻资讯',
-    child: ['公司动态', '行业资讯'],
+    name: "新闻资讯",
+    child: ["公司动态", "行业资讯"],
   },
   {
-    name: '服务介绍',
-    child: ['服务体系', '常见问题', '资料下载'],
+    name: "服务介绍",
+    child: ["服务体系", "常见问题", "资料下载"],
   },
   {
-    name: '联系我们',
-    child: ['联系方式', '客户留言'],
+    name: "联系我们",
+    child: ["联系方式", "客户留言"],
   },
-]
+];
 </script>
 <style lang="scss" scoped>
 .foot {
