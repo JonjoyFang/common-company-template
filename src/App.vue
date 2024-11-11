@@ -4,9 +4,9 @@
   <HomeFooter />
 </template>
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HomeHeader from './components/HomeHeader.vue'
-import HomeFooter from './components/HomeFooter.vue'
+import { RouterView } from "vue-router";
+import HomeHeader from "./components/HomeHeader.vue";
+import HomeFooter from "./components/HomeFooter.vue";
 </script>
 <style scoped>
 @media (min-width: 1024px) {

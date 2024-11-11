@@ -8,7 +8,9 @@
         <div
           v-for="(item, index) in tabList"
           :key="index"
-          :class="index == tabIndex ? 'lists-item lists-item-active' : 'lists-item'"
+          :class="
+            index == tabIndex ? 'lists-item lists-item-active' : 'lists-item'
+          "
           @click="changeTab(index)"
         >
           <RouterLink :to="item.link">{{ item.name }}</RouterLink>
@@ -18,42 +20,56 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-let tabIndex = ref(0)
+import { watch, computed } from "vue";
+import { RouterLink } from "vue-router";
+import { useStore } from "vuex";
+const store = useStore();
+let tabIndex = computed(() => {
+  return store.state.routerIndex;
+});
 let tabList = [
   {
-    name: '首页',
-    link: '/',
+    name: "首页",
+    link: "/",
+    value: "home",
   },
   {
-    name: '关于我们',
-    link: '/about',
+    name: "关于我们",
+    link: "/about",
+    value: "about",
   },
   {
-    name: '产品中心',
-    link: '/product',
+    name: "产品中心",
+    link: "/product",
+    value: "product",
   },
   {
-    name: '应用领域',
-    link: '/case',
+    name: "应用领域",
+    link: "/case",
+    value: "case",
   },
   {
-    name: '新闻资讯',
-    link: '/news',
+    name: "新闻资讯",
+    link: "/news",
+    value: "news",
   },
   {
-    name: '服务介绍',
-    link: '/download',
+    name: "服务介绍",
+    link: "/download",
+    value: "download",
   },
   {
-    name: '联系我们',
-    link: '/contact',
+    name: "联系我们",
+    link: "/contact",
+    value: "contact",
   },
-]
+];
+watch(tabIndex, (newVal, oldVal) => {
+  console.log(newVal, oldVal, "watcc");
+});
 const changeTab = (index) => {
-  tabIndex.value = index
-}
+  tabIndex.value = index;
+};
 </script>
 <style lang="scss" scoped>
 .header-pc {
@@ -96,7 +112,7 @@ const changeTab = (index) => {
           width: 70px;
           height: 2px;
           background: #ffffff;
-          content: '';
+          content: "";
           position: absolute;
           left: 50%;
           margin-left: -35px;

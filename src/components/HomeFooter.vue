@@ -4,12 +4,9 @@
       <div class="content">
         <div class="content-left">
           <img src="@/assets/img/logo.jpg" />
-          <h3>xx公司</h3>
-          <p>联系人：xx 电话：xx</p>
-          <p>地址：xx</p>
-          <h3>xx公司</h3>
-          <p>联系人：xx 电话：xx</p>
-          <p>地址：深圳市宝安区沙井街道坣岗社区中日龙路10号厂房1层</p>
+          <h3>深圳市楚林机电设备有限公司</h3>
+          <p>联系人：张振 电话：13651472302</p>
+          <p>地址：深圳市光明区公明街道水墩街23号605</p>
         </div>
         <div class="content-center">
           <div
@@ -53,7 +50,7 @@ const list = [
   },
   {
     name: "服务介绍",
-    child: ["服务体系", "常见问题", "资料下载"],
+    child: ["样本下载", "资料下载"],
   },
   {
     name: "联系我们",

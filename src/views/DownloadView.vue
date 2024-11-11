@@ -27,9 +27,9 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
 let listNum = ref();
-const list = ["服务体系", "常见问题", "资料下载"];
+const list = ["样本下载", "资料下载"];
 const changeList = (index) => {
   listNum.value = index;
 };
