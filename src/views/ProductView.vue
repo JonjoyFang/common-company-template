@@ -59,7 +59,7 @@ import sifuImg from "@/assets/img/sifu.jpg";
 let listNum = ref(null);
 const list = [
   {
-    name: "谐波速机",
+    name: "谐波减速机",
     img: xieboImg,
   },
   {
@@ -67,7 +67,7 @@ const list = [
     img: scaImg,
   },
   {
-    name: "伺服执行器",
+    name: "执行元件",
     img: sifuImg,
   },
 ];
@@ -165,7 +165,7 @@ const changeList = (index) => {
               height: 180px;
               text-align: center;
               line-height: 180px;
-              border-bottom: 1px solid #c9c9c9;
+              // border-bottom: 1px solid #c9c9c9;
               transition: all 0.6s;
               box-sizing: border-box;
 

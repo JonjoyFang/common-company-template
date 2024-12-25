@@ -38,7 +38,7 @@ const list = [
   },
   {
     name: "产品中心",
-    child: ["谐波速机", "SCARA", "伺服执行器"],
+    child: ["谐波减速机", "SCARA", "执行元件"],
   },
   {
     name: "应用领域",
