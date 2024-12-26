@@ -30,6 +30,7 @@
             我们拥有经验丰富的销售和技术团队，通过服务提升客户满意度，不断了解客户需求，持续跟踪客户发展,不断向客户学习，为客户提供优秀的产品解决方案。
             技术在前线，服务在身边。
             希望通过我们优异的产品和专业的服务，能为您的事业发展助一臂之力！
+            <img src="@/assets/img/gongsijieshao.jpg" />
             <!-- 优势： 产品品质稳定、性价比高 常规型号有库存，支持非标定制
             提供专业的技术选型 优秀的售后服务团队 -->
           </div>
@@ -182,6 +183,13 @@ const changeList = (index) => {
         min-height: 200px;
         padding: 20px;
         line-height: 1.75em;
+      }
+      .jieshao {
+        img {
+          display: block;
+          width: 578px;
+          height: 394px;
+        }
       }
       .wenhua {
         width: 100%;

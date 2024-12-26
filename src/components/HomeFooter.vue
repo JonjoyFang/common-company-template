@@ -104,6 +104,7 @@ const list = [
       }
       .content-right {
         padding-top: 50px;
+        text-align: center;
         img {
           width: 110px;
         }

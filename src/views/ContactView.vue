@@ -166,15 +166,15 @@ const changeList = (index) => {
   }
 };
 const onBlurCode = () => {
-  let status = form.code == codeNum.value;
+  let status = form.codeNum == codeNum.value;
   verifyStatus.value = status;
+  console.log(form, form.codeNum, codeNum.value, "vvvvv");
   if (!status) {
     // 给错误提示并清空输入框、刷新验证码
     ElMessage.error("验证码错误");
     form.codeNum = "";
     makeCode();
   }
-  console.log(form, "vvvvv");
 };
 const onSubmit = async (formEl) => {
   if (!formEl) return;

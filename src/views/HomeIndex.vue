@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-carousel direction="horizontal" indicator-position="" height="650px">
       <el-carousel-item v-for="item in carouselList" :key="item">
-        <img :src="imgTransfer(item)" />
+        <img :src="item" />
       </el-carousel-item>
     </el-carousel>
     <div class="layout-tem">
@@ -20,7 +20,11 @@
 </template>
 <script setup>
 import { RouterLink } from "vue-router";
-const carouselList = ["1", "2", "3", "4"];
+import banner1 from "@/assets/img/banner1.png";
+import banner2 from "@/assets/img/banner1.png";
+import banner3 from "@/assets/img/banner1.png";
+import banner4 from "@/assets/img/banner1.png";
+const carouselList = [banner1, banner2, banner3, banner4];
 const list = [
   {
     name: "关于我们",
@@ -47,9 +51,6 @@ const list = [
     link: "/download",
   },
 ];
-const imgTransfer = (name) => {
-  return `src/assets/img/banner${name}.png`;
-};
 </script>
 <style lang="scss" scoped>
 .common-layout {
