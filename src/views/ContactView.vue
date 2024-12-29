@@ -88,6 +88,7 @@ import { RouterLink } from "vue-router";
 import { ref, reactive, onMounted } from "vue";
 import CaptchaMini from "captcha-mini";
 import { ElMessage } from "element-plus";
+import { post } from "@/api/request";
 
 let listNum = ref(0);
 let codeNum = ref(null);
@@ -180,6 +181,20 @@ const onSubmit = async (formEl) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
+      const obj = {
+        contact: form.contact,
+        content: form.content,
+        phone: form.phone,
+      };
+      post("/api/contact/submit", obj)
+        .then((res) => {
+          if (res) {
+            ElMessage.success("提交成功");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log("submit!");
     } else {
       console.log("error submit!", fields);

@@ -46,6 +46,13 @@
             </div>
           </div>
         </div>
+        <div class="content-pagination-box">
+          <el-pagination
+            layout="prev, pager, next"
+            background="none"
+            :total="50"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -53,6 +60,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { ref } from "vue";
+import { get } from "@/api/request";
 import xieboImg from "@/assets/img/xiebo.jpg";
 import scaImg from "@/assets/img/sca.jpg";
 import sifuImg from "@/assets/img/sifu.jpg";
@@ -74,6 +82,33 @@ const list = [
 const changeList = (index) => {
   listNum.value = index;
 };
+
+// 查询所有产品分类
+const getTypeList = async () => {
+  const data = await get("/api/category/list");
+  return data || [];
+};
+// 查询商品详情
+const getGoodsDetail = async (id) => {
+  const data = await get(`/api/product/${id}`);
+  return data || [];
+};
+// 查询当前分类下的商品（分页）
+const getGoodsList = async (page, pageSize, name) => {
+  const obj = { page, pageSize, name };
+  const data = await get(`/api/product/page`, obj);
+  return data || [];
+};
+
+// 获取动态图片路径
+const images = import.meta.glob("@/assets/img/*.jpg");
+const getImageUrl = (name) => {
+  return images(`@/assets/img/${name}.jpg`)?.default;
+};
+
+// const getImageUrl = (name) => {
+//   return new URL(`../assets/images/${name}.jpg`, import.meta.url).href;
+// };
 </script>
 <style lang="scss" scoped>
 .product {
@@ -189,6 +224,14 @@ const changeList = (index) => {
           .content-list-box {
             // width: 100%;
           }
+        }
+      }
+      .content-pagination-box {
+        width: 100%;
+        display: flex;
+        margin-bottom: 20px;
+        .el-pagination {
+          margin: 0 auto;
         }
       }
     }

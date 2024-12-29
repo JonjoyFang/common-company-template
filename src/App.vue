@@ -5,8 +5,14 @@
 </template>
 <script setup>
 import { RouterView } from "vue-router";
+import { onMounted } from "vue";
+import { getToken } from "@/utils/index";
 import HomeHeader from "./components/HomeHeader.vue";
 import HomeFooter from "./components/HomeFooter.vue";
+
+onMounted(() => {
+  getToken();
+});
 </script>
 <style scoped>
 @media (min-width: 1024px) {
