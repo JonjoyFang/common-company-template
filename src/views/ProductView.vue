@@ -8,39 +8,31 @@
           v-for="(item, index) in list"
           :key="index"
           :class="listNum == index ? 'list-box list-box-active' : 'list-box'"
-          @click="changeList(index)"
+          @click="changeList(index, item.name)"
         >
-          {{ item.name }}
+          {{ item.name || "" }}
         </div>
       </div>
       <div class="about-content-right">
         <div class="title">
-          {{ listNum == null ? "服务介绍" : list[listNum].name }}
+          {{
+            listNum == null
+              ? "服务介绍"
+              : (list[listNum] && list[listNum].name) || ""
+          }}
           <div class="maodian">
-            <RouterLink to="/">首页</RouterLink> >
-            {{ listNum == null ? "服务介绍" : list[listNum].name }}
+            <RouterLink to="/">首页</RouterLink> >服务介绍
           </div>
         </div>
         <div class="right-content">
-          <div
-            class="right-content-list right-content-list-all"
-            v-if="listNum == null"
-          >
+          <div class="right-content-list right-content-list-all">
             <div
               class="content-list-box"
-              v-for="(item, index) in list"
+              v-for="(item, index) in goodsList"
               :key="index"
             >
               <div class="img">
-                <img :src="item.img" />
-              </div>
-              <div class="btn">了解详情</div>
-            </div>
-          </div>
-          <div class="right-content-list" v-else>
-            <div class="content-list-box">
-              <div class="img">
-                <img :src="list[listNum].img" />
+                <img :src="xieboImg" />
               </div>
               <div class="btn">了解详情</div>
             </div>
@@ -49,8 +41,8 @@
         <div class="content-pagination-box">
           <el-pagination
             layout="prev, pager, next"
-            background="none"
-            :total="50"
+            :current-page="pageNum"
+            :total="total"
           />
         </div>
       </div>
@@ -59,34 +51,49 @@
 </template>
 <script setup>
 import { RouterLink } from "vue-router";
-import { ref } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { get } from "@/api/request";
 import xieboImg from "@/assets/img/xiebo.jpg";
 import scaImg from "@/assets/img/sca.jpg";
 import sifuImg from "@/assets/img/sifu.jpg";
+// 分类索引
 let listNum = ref(null);
-const list = [
-  {
-    name: "谐波减速机",
-    img: xieboImg,
-  },
-  {
-    name: "SCARA",
-    img: scaImg,
-  },
-  {
-    name: "执行元件",
-    img: sifuImg,
-  },
-];
-const changeList = (index) => {
+// 当前分类名称
+let typeName = ref("");
+// 分类列表
+let list = reactive(null);
+// 商品列表
+let goodsList = reactive([]);
+// 页码
+let pageNum = ref(1);
+// 商品总数
+let total = ref(0);
+
+const changeList = (index, name) => {
   listNum.value = index;
+  typeName.value = name;
+  getGoodsList(1, 10, name);
 };
 
+onMounted(() => {
+  getTypeList();
+});
+
 // 查询所有产品分类
-const getTypeList = async () => {
-  const data = await get("/api/category/list");
-  return data || [];
+const getTypeList = () => {
+  get("/api/category/list")
+    .then((res) => {
+      console.log(res, "fenlei");
+      if (res && res.length > 0) {
+        list = res;
+        listNum.value = 0;
+        typeName.value = res[0].name;
+        getGoodsList(1, 10, res[0].name);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 // 查询商品详情
 const getGoodsDetail = async (id) => {
@@ -96,8 +103,10 @@ const getGoodsDetail = async (id) => {
 // 查询当前分类下的商品（分页）
 const getGoodsList = async (page, pageSize, name) => {
   const obj = { page, pageSize, name };
-  const data = await get(`/api/product/page`, obj);
-  return data || [];
+  get(`/api/product/page`, obj).then((res) => {
+    goodsList = res.records || [];
+    total.value = res.total;
+  });
 };
 
 // 获取动态图片路径

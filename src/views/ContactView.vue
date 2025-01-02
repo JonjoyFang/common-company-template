@@ -73,7 +73,7 @@
                 <el-button type="primary" @click="onSubmit(ruleFormRef)"
                   >提交</el-button
                 >
-                <el-button>重置</el-button>
+                <el-button @click="onReset">重置</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -98,7 +98,7 @@ const rules = reactive({
   phone: [{ required: true, message: "电话不能为空", trigger: "blur" }],
   codeNum: [{ required: true, message: "验证码不能为空", trigger: "blur" }],
 });
-const form = reactive({
+let form = reactive({
   contact: "", // 联系人
   phone: "", // 联系电话
   content: "", // 备注
@@ -149,7 +149,7 @@ const makeCode = () => {
     fontFamily: ["Georgia", "微软雅黑", "Helvetica", "Arial"], //字体类型
     fontStyle: "stroke", //字体绘制方法，有fill和stroke
     content: "123456789", //验证码内容
-    length: 6, //验证码长度
+    length: 4, //验证码长度
   });
 
   captcha2.draw(document.querySelector("#captchaCode"), (r) => {
@@ -177,6 +177,13 @@ const onBlurCode = () => {
     makeCode();
   }
 };
+const onReset = () => {
+  form.codeNum = "";
+  form.phone = "";
+  form.content = "";
+  form.contact = "";
+};
+
 const onSubmit = async (formEl) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
@@ -190,6 +197,12 @@ const onSubmit = async (formEl) => {
         .then((res) => {
           if (res) {
             ElMessage.success("提交成功");
+            form.codeNum = "";
+            form.phone = "";
+            form.content = "";
+            form.contact = "";
+
+            makeCode();
           }
         })
         .catch((err) => {

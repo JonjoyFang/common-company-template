@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 创建一个 axios 实例
 const instance = axios.create({
-  baseURL: "http://47.119.135.4", // 基础 URL
+  baseURL: "http://47.119.135.4:80", // 基础 URL
   timeout: 10000, // 超时时间
   headers: {
     "Content-Type": "application/json",
@@ -15,7 +15,8 @@ instance.interceptors.request.use(
     // 在发送请求之前做些什么，例如添加 token 到请求头
     const token = localStorage.getItem("token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // config.headers.Authorization = `Bearer ${token}`;
+      config.headers.token = `${token}`;
     }
     return config;
   },
@@ -28,11 +29,13 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   (response) => {
+    console.log(response, "requeset请求");
+    const { status, data } = response || {};
     // 对响应数据做点什么，例如处理错误码
-    if (response.status === 1) {
-      return response.data;
+    if (status === 200 && data && data.code == 1) {
+      return data.data || "";
     } else {
-      return Promise.reject(response.data);
+      return Promise.reject(data);
     }
   },
   (error) => {

@@ -21,9 +21,9 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import banner1 from "@/assets/img/banner1.png";
-import banner2 from "@/assets/img/banner1.png";
-import banner3 from "@/assets/img/banner1.png";
-import banner4 from "@/assets/img/banner1.png";
+import banner2 from "@/assets/img/banner2.png";
+import banner3 from "@/assets/img/banner3.png";
+import banner4 from "@/assets/img/banner4.png";
 const carouselList = [banner1, banner2, banner3, banner4];
 const list = [
   {

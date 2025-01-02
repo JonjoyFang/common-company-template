@@ -1,10 +1,14 @@
-import { get } from "@/api/request.js";
+import { get, post } from "@/api/request.js";
 
 // 获取token
 export const getToken = async () => {
   let data = null;
+  const obj = {
+    password: "Chulin@123456",
+    username: "admin",
+  };
   try {
-    data = await get("/api/token/get");
+    data = await post("/api/token/get", obj);
     localStorage.setItem("token", (data && data.token) || "");
   } catch (error) {
     console.error(error);
