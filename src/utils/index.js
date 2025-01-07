@@ -21,9 +21,9 @@ export const refreshToken = async () => {
   let data = null;
   try {
     data = await get("/api/token/refresh");
+    console.log(data, "刷新token");
     localStorage.setItem("token", data || "");
   } catch (error) {
     console.error(error);
   }
-  return data || null;
 };

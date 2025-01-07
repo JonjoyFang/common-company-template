@@ -119,7 +119,7 @@ const list = [
         background: url("@/assets/img/1.jpg");
       }
       .layout-template-box2 {
-        background: url("@/assets/img/3.jpg");
+        background: url("@/assets/img/2.jpg");
       }
       .layout-template-box3 {
         background: url("@/assets/img/3.jpg");

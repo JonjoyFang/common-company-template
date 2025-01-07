@@ -6,12 +6,15 @@
 <script setup>
 import { RouterView } from "vue-router";
 import { onMounted } from "vue";
-import { getToken } from "@/utils/index";
+import { getToken, refreshToken } from "@/utils/index";
 import HomeHeader from "./components/HomeHeader.vue";
 import HomeFooter from "./components/HomeFooter.vue";
 
 onMounted(() => {
   getToken();
+  setTimeout(() => {
+    refreshToken();
+  }, 3590000);
 });
 </script>
 <style scoped>
